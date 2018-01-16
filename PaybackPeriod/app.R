@@ -11,16 +11,16 @@ Year,CashFlow
 4,25000
 5,25000"
 
-df <- read.table(text = cash_flow, sep =",", header = TRUE, stringsAsFactors = FALSE)
-print(df$Year)
+discountRate <- 10
 
 ui <- fluidPage(titlePanel("Payback Period Example"),
+                a("Source Code", href="https://github.com/parewalabs/financial-management/blob/master/PaybackPeriod/app.R"),
                 br(), br(),
                 sidebarLayout(
                   sidebarPanel(sliderInput("capitalInput", "Initial Capital", min = 0, max = 100000,
                                            value = capital_investment, pre = "$"),
                                sliderInput("discountRate", "Discount Rate", min=0, max=30,
-                                           value=10, post = "%"),
+                                           value=discountRate, post = "%"),
                                textAreaInput("cashflowInput", "Cash flows", value = cash_flow, width = NULL, height = NULL,
                                              cols = NULL, rows = 10, placeholder = NULL, resize = NULL)
                   ),
@@ -38,10 +38,6 @@ server <- function(input, output) {
   cashflow_df <- reactive({
     read.table(text = input$cashflowInput, sep =",", header = TRUE, stringsAsFactors = FALSE) 
   })
-  
-  paybackPeriod <- function(discountRate) {
-    
-  }
   
   output$paybackPeriod <- renderText({
     capital <- input$capitalInput
@@ -88,7 +84,6 @@ server <- function(input, output) {
   })
   
   output$cashflowsBarChart <- renderPlot({
-    cashflow_df()$CashFlow
     ggplot(cashflow_df(), aes(Year, CashFlow)) + geom_bar(stat = "identity")
   })
 }
