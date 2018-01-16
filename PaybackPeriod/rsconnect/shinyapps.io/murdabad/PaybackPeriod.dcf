@@ -1,0 +1,12 @@
+name: PaybackPeriod
+title: PaybackPeriod
+username:
+account: murdabad
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 257275
+bundleId: 1178595
+url: https://murdabad.shinyapps.io/PaybackPeriod/
+when: 1516121073.22036
+asMultiple: FALSE
+asStatic: FALSE
