@@ -51,12 +51,10 @@ server <- function(input, output) {
       }
       index <- index + 1
     }
+    
     lastYearCashFlow <- cashflow_df()$CashFlow[index]
-    
     amountExceedingCapital <- sum - capital
-    
     index <- index - amountExceedingCapital/lastYearCashFlow
-    
     index <- round(index, digits=2)
     return(index)
   })
